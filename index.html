@@ -1,0 +1,142 @@
+<!-- This is a try for making a chat website, we don't know very well javascript so we couldn't make it write a txt. But we did that you can chat and it can read a text and display it -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .topper {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: cadetblue;
+            color: black;
+            text-align: center;
+            /* Pone aca un buen font */
+        }
+
+        #title {
+            color: black;
+            border: 1px solid black;
+        }
+
+        #subtitle {
+            font-family: Candara;
+            font-size: larger;
+        }
+        .chatt {  
+            position: static;
+            height: 55%;
+            overflow: auto;
+        }
+        .userinput {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background-color: black;
+            color: white;
+            /* Pone aca un buen font */
+        }
+
+        .usertext{
+            height: 55%;
+            width: 65%;
+            margin: 20px;
+            align-items: center;
+            font-size: 50px;
+
+        }
+
+        .userButt{
+            margin-left: 8%;
+            height: 70%;
+            width: 17%;
+            align-items: center;
+            font-size: 50px;
+            font-family: Courier;
+        }
+
+        .sentText{
+            text-align: right;
+            color: blue;
+        }
+  
+    </style>
+    <title>Global chat</title>
+</head>
+<body>
+
+<div class=topper>
+<h1 id=title>Hello World!</h1>
+<h3 id=subtitle>This is a online, no rules, anonymous chat-website. Everytime you join the website or reload the chat will be resotred</h3>
+<h3 id=subtitle>This is to proof that humanity is good!</h3>
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+
+<div class=chatt id="chat">
+<h2>Hellop :P</h2>
+</p>
+</div>
+<br><br><br><br><br>
+
+<footer class=userinput>
+    <input type="text" placeholder="Type here :()" class=usertext id="userText">    
+    <button type="submit" class=userButt id="userbutt" onclick="send()"><b>Send</b></button>
+    
+    <!-- We didn't add to submit with the Enter key so there is less griefing -->
+    
+    <script type="text/javascript">
+        var input = document.getElementById("userText");
+        input.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("userbutt").click();
+                }
+            });        
+
+        function send() 
+        {
+
+            // Here we got superrrr stuck, we had everything done, we only had to add something to write on the txt or make a socket but we didnt have much time left. This was an absolute boomer and we didn't have any more time left to learn socket and implment it
+            var para = document.createElement("p");
+            var message = document.getElementById("userText").value;
+            para.innerHTML = message;
+            var element = document.getElementById("chat");
+            element.appendChild(para); 
+            document.getElementById('userText').value = ''                  
+                 
+            window.scrollBy(0, 100);
+            document.getElementById("userbutt").disabled = true;
+            setTimeout(function(){document.getElementById("userbutt").disabled = false;},2500);                   
+       	
+            
+        };
+
+        function read()
+        {
+            // Since we did this chat from complete scratch without any research, we really messed up and didn't do it with a socket as supposed to, we thought of writing a txt and then reading it. We did the reading part ok what we got stuck on writing the txt and that really messed us up. We research and we had to start from the beggining and use a socket, but we didn't have time left sadly :( 
+            // This code works really good, but we can't write anything on the txt so :(((
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", "chat.txt", false);
+            rawFile.onreadystatechange = function ()
+            {
+                if(rawFile.readyState === 4)
+                {
+                    if(rawFile.status === 200 || rawFile.status == 0)
+                    {
+                        var allText = rawFile.responseText;
+                        var para = document.getElementById("chat");
+                        para.innerHTML = allText;
+                    }
+                }
+            };
+            rawFile.send(null);
+            window.scrollBy(0, 100);
+
+        }
+    </script>
+</footer>
+</body> 
+</html>

@@ -1,0 +1,27 @@
+BoxLayout:
+    orientation: "vertical"
+    
+    Label:
+        id: chat_text
+        markup: True
+    
+        size_hint_y: 8 
+        background_color: 0,1,1,1
+        
+        text_size: self.size
+        halign: "left"
+        valign: "top"
+        
+    BoxLayout:
+    
+        TextInput: 
+            id: input
+            multiline: False
+            
+            
+        Button:
+            id: submit
+            text: "submit"
+            size_hint_x: .4
+            bg: ""
+            
